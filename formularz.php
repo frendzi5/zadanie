@@ -12,21 +12,16 @@
    $Status_Wypozyczenia= $_POST['Status_Wypozyczenia'];
    
    $dbc= mysqli_connect($host,$user,$password, $dbase)  
-   
+ 
    or die("Unable to select database"); 
-   
-   
+  
    $query= "INSERT INTO $table (tytul, Data_Wydania , autor, isbn, Status_Wypozyczenia) VALUES ('$tytul','$data_wydania','$autor','$isbn','$Status_Wypozyczenia')";
-   
-   
    
    mysqli_query ($dbc, $query) 
    or die ("Error querying database"); 
    
    header("Location: index.php");
    die(); 
-   
-   
+
    mysqli_close($dbc); 
-    
    ?>
