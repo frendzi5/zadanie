@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<title>biblioteka frendzi</title>
+  <link rel='stylesheet' href="style.css">
+</head>
+<body>
+<div class="grid-container">
+  <div class="item1"><img src='img/frendzi.jpg' height='200px'style="display:inline-block;"/><ul id="menu" style="display:inline-block;"><li><a href='youtube.com'>link</a></li><li><a href='youtube.com'>link</a></li><li><a href='youtube.com'>link</a></li></ul>
+
+  </div>
+  <div class="item2">Najnowsze
+  <?php
+  $con = mysqli_connect("localhost","root","","ksiazki");
+
+  if (mysqli_connect_errno()) {
+    echo "Failed to connect to MySQL: " . mysqli_connect_error();
+    exit();
+  }
+
+  $sql = "SELECT * FROM Ksiazki ORDER BY Data_Dodania DESC LIMIT 10; ";
+
+
+  if ($result = mysqli_query($con, $sql)) {
+    echo '<table><tr><th>Autor</th><th id="nazwa">Tytuł</th></tr>';
+    while ($row = mysqli_fetch_row($result)) {
+      echo '<tr><td>'.$row[4].'</td><td>'.$row[1].'<td></tr>';
+    }
+    echo '</table>';
+    mysqli_free_result($result);
+  }
+
+  mysqli_close($con);
+   ?>
+  </div>
+  <div class="item3">Formularz
+    <form action="formularz.php" method="post">
+      <h1>Formularz dodawania książek</h1>
+      <div class="Formularz">
+         <label for="tytul">Tytuł:</label><br>
+         <input type="text" id="tytul" name="tytul" required><br>
+         <label for="Autor">Autor:</label><br>
+         <input type="text" id="Autor" name="Autor" required><br>
+         <label for="ISBN">ISBN:</label><br>
+         <input type="text" id="ISBN" name="ISBN" title="Please enter a valid ISBN" required><br>
+         <label for="Data_Wydania">Data Wydania:</label><br>
+         <input type="date" id="Data_Wydania" name="Data_Wydania" required><br>
+         <label for="Status_Wypozyczenia">Status wypożyczenia:</label><br>
+         <input type="radio" id="Status_Wypozyczenia" name="Status_Wypozyczenia" value="1"><br>
+         <input type="submit" id="submit"value="Submit">
+      </div>
+</form>
+  </div>  
+  <div class="item4">Adres: Wrocław, Stalowa15 55-092</br>nr.tel:555-555-555</div>
+</div>
+</body>
+</html>
